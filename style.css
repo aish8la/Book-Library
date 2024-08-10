@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.page-container {
+    display: grid;
+    grid-template-rows: minmax(150px, 1fr) 6fr minmax(50px, 1fr);
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+}
+
+.header,
+.book-shelf,
+footer {
+    border: 2px solid black;
+}
+
+.header {
+    grid-row: 1 / 2;
+    font-weight: 800;
+    font-size: 48px;
+}
+
+.header > button {
+    font-size: 20px;
+    border: none;
+    background-color: aqua;
+    border-radius: 10px;
+    padding: 10px 30px;
+}
+
+.book-shelf {
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 15px;
+}
+
+.book-card {
+    border: 1px solid blue;
+}
+
+.footer {
+    grid-row: 3 / 4;
+}
