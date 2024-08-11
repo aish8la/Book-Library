@@ -6,21 +6,27 @@
     padding: 0;
 }
 
+body {
+    background-color: rgba(227, 227, 227, 0.796);
+}
+
 .page-container {
     display: grid;
     grid-template-rows: auto 1fr auto;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     gap: 15px;
-    background-color: rgba(227, 227, 227, 0.796);
     min-height: 100vh;
 }
 
 .header,
 .book-shelf,
 .footer {
-    border: 2px solid black;
+    border: 5px solid black;
     padding: 5px 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .header {
@@ -45,10 +51,11 @@
     grid-row: 2 / 3;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: minmax(250px, 50%);
+    grid-auto-rows: minmax(220px, 50%);
     gap: 15px;
     align-content: start;
     padding: 20px 30px;
+    margin: 0 15px;
 }
 
 .book-card {
@@ -58,6 +65,10 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
+}
+
+.book-details {
+    flex-grow: 1;
 }
 
 .book-title {
@@ -73,16 +84,24 @@
 }
 
 .card-buttons {
-    margin-top: auto;
     display: flex;
     gap: 20px;
     align-self: flex-end;
 }
 
 .card-tags {
+    margin-top: auto;
     align-self: flex-start;
 }
 
 .footer {
     grid-row: 3 / 4;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.header,
+.footer {
+    margin: 15px;
 }
