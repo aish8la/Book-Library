@@ -8,21 +8,28 @@
 
 .page-container {
     display: grid;
-    grid-template-rows: minmax(150px, 1fr) 6fr minmax(50px, 1fr);
+    grid-template-rows: auto 1fr auto;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
+    gap: 15px;
+    background-color: rgba(227, 227, 227, 0.796);
+    min-height: 100vh;
 }
 
 .header,
 .book-shelf,
-footer {
+.footer {
     border: 2px solid black;
+    padding: 5px 30px;
 }
 
 .header {
     grid-row: 1 / 2;
     font-weight: 800;
     font-size: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header > button {
@@ -31,15 +38,17 @@ footer {
     background-color: aqua;
     border-radius: 10px;
     padding: 10px 30px;
+    
 }
 
 .book-shelf {
     grid-row: 2 / 3;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: minmax(250px, 50%);
     gap: 15px;
-    padding: 15px;
     align-content: start;
+    padding: 20px 30px;
 }
 
 .book-card {
@@ -47,29 +56,20 @@ footer {
     border: 1px solid blue;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 15px;
 }
 
-.book-details {
-    text-align: center;
-}
-
 .book-title {
-    font-weight: 800;
-    font-size: 20px;
-    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.book-author {
-    font-weight: 600;
-    font-size: 16px;
-}
-
+.book-author,
 .book-pages {
-    font-weight: 800;
-    font-size: 20px;
-    margin-top: 40px;
+    font-size: 14px;
+    color: #666;
 }
 
 .card-buttons {
