@@ -10,6 +10,16 @@ body {
     background-color: rgba(227, 227, 227, 0.796);
 }
 
+.form-dialogue {
+    min-height: 80vh;
+    margin: 20px;
+}
+
+.form-dialogue::backdrop {
+    backdrop-filter: blur(5px);
+    background-color: #666;
+}
+
 .page-container {
     display: grid;
     grid-template-rows: auto 1fr auto;
