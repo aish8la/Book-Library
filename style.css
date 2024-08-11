@@ -60,11 +60,18 @@ body {
 
 .book-card {
     padding: 20px;
-    border: 1px solid blue;
     display: flex;
+    border: 3px solid rgba(0, 0, 0, 0);
+    border-radius: 10px;
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
+    transition: border 0.3s ease, background-color 0.3s ease ;
+}
+
+.book-card:hover {
+    border: 3px solid rgb(0, 0, 0);
+    background-color: rgba(227, 227, 227, 0.796);
 }
 
 .book-details {
