@@ -38,13 +38,19 @@ body {
     align-items: center;
 }
 
-.header > button {
+.new.button {
     font-size: 20px;
-    border: none;
-    background-color: aqua;
+    border: 2px solid rgba(0, 0, 0, 0);
+    background-color: white;
     border-radius: 10px;
-    padding: 10px 30px;
-    
+    padding: 6px 24px;
+    transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.new.button:hover {
+    border: 2px solid rgb(0, 0, 0);
+    background-color: rgb(88, 215, 230);
+    cursor: pointer;
 }
 
 .book-shelf {
@@ -99,6 +105,25 @@ body {
 .card-tags {
     margin-top: auto;
     align-self: flex-start;
+    display: flex;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 0;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.tag.read-tag {
+    background-color: rgb(30, 234, 30);
+}
+
+.tag.unread-tag {
+    background-color: rgb(234, 30, 30);
+}
+
+.tag {
+    background-color: rgb(30, 197, 234);
+    padding: 2px 5px;
 }
 
 .footer {
