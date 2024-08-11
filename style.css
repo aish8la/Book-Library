@@ -99,7 +99,32 @@ body {
 .card-buttons {
     display: flex;
     gap: 20px;
-    align-self: flex-end;
+    align-self: stretch;
+    justify-content: space-between;
+}
+
+.card-button {
+    background-color: inherit;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    padding: 5px 10px;
+    min-width: 70px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.card-button:hover {
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.card-button.read:hover {
+    background-color: rgb(49, 216, 20);
+}
+
+.card-button.delete:hover {
+    background-color: rgb(255, 0, 0);
 }
 
 .card-tags {
@@ -125,6 +150,8 @@ body {
     background-color: rgb(30, 197, 234);
     padding: 2px 5px;
 }
+
+
 
 .footer {
     grid-row: 3 / 4;
