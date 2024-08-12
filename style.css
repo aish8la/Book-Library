@@ -18,6 +18,12 @@ body {
     transform: translate(-50%, -50%);
     border: 5px solid black;
     border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+}
+
+.form-dialogue::backdrop {
+    backdrop-filter: blur(10px);
+    background-color: #6666662e;
 }
 
 .dialogue-content {
@@ -109,11 +115,6 @@ body {
 .form-close-button:hover {
     cursor: pointer;
     background-color: #ff000084;
-}
-
-.form-dialogue::backdrop {
-    backdrop-filter: blur(10px);
-    background-color: #6666662e;
 }
 
 .form-button {
