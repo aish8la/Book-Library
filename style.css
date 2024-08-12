@@ -254,24 +254,25 @@ body > div > .page-container {
     margin-top: auto;
     align-self: flex-start;
     display: flex;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 2px 0;
+    font-size: 14px;
+    font-weight: 600;
     gap: 5px;
     flex-wrap: wrap;
 }
 
 .tag.read-tag {
-    background-color: rgb(30, 234, 30);
+    background-color: rgba(0, 209, 0, 0.445);
 }
 
 .tag.unread-tag {
-    background-color: rgb(234, 30, 30);
+    background-color: rgba(234, 30, 30, 0.445);
 }
 
 .tag {
-    background-color: rgb(30, 197, 234);
-    padding: 2px 5px;
+    background-color: rgba(30, 197, 234, 0.434);
+    padding: 1px 4px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 
