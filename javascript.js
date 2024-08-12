@@ -1,4 +1,4 @@
-const addNewButton = document.querySelector('#add-new-btn');
+const addNewButton = document.querySelector('new-button');
 const formDialogue = document.querySelector('form-dialogue');
 
 addNewButton.addEventListener('click', () => {
