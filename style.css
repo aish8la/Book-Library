@@ -12,7 +12,12 @@ body {
 
 .form-dialogue {
     min-height: 80vh;
+    min-width: 80vw;
     margin: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .form-dialogue::backdrop {
@@ -20,7 +25,7 @@ body {
     background-color: #666;
 }
 
-.page-container {
+body > div > .page-container {
     display: grid;
     grid-template-rows: auto 1fr auto;
     font-family: "Roboto", sans-serif;
