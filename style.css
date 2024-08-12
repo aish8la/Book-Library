@@ -148,7 +148,7 @@ body > div > .page-container {
     align-items: center;
 }
 
-.new.button {
+.new-button {
     font-size: 20px;
     border: 2px solid rgba(0, 0, 0, 0.197);
     background-color: white;
@@ -157,7 +157,7 @@ body > div > .page-container {
     transition: border 0.3s ease, background-color 0.3s ease;
 }
 
-.new.button:hover {
+.new-button:hover {
     border: 2px solid rgb(0, 0, 0);
     background-color: rgb(88, 215, 230);
     cursor: pointer;
