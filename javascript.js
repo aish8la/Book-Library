@@ -19,5 +19,5 @@ function BookObject(title, author, pages, read) {
 }
 
 BookObject.prototype.readToggle = function() {
-    return !this.read;
+    this.read = !this.read;
 }
