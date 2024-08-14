@@ -26,6 +26,6 @@ BookObject.prototype.readToggle = function() {
 const generateUniqueId = (function outerIdGen() {
     let newId = 0;
     return () => {
-        return ++newId;
+        return `bkID-${++newId}`;
     }
 })();
