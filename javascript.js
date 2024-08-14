@@ -11,7 +11,8 @@ formCloseButton.addEventListener('click', () => {
     formDialogue.close();
 });
 
-function BookObject(title, author, pages, read) {
+function BookObject(bookId, title, author, pages, read) {
+    this.bookId = bookId;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -21,3 +22,4 @@ function BookObject(title, author, pages, read) {
 BookObject.prototype.readToggle = function() {
     this.read = !this.read;
 }
+
