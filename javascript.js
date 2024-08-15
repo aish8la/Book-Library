@@ -45,34 +45,6 @@ const myLibrary = [
         pages: 310,
         read: false
     },
-    {
-        bookId: "7",
-        title: "Brave New World",
-        author: "Aldous Huxley",
-        pages: 311,
-        read: true
-    },
-    {
-        bookId: "8",
-        title: "The Da Vinci Code",
-        author: "Dan Brown",
-        pages: 454,
-        read: false
-    },
-    {
-        bookId: "9",
-        title: "The Alchemist",
-        author: "Paulo Coelho",
-        pages: 197,
-        read: true
-    },
-    {
-        bookId: "10",
-        title: "Moby-Dick",
-        author: "Herman Melville",
-        pages: 585,
-        read: false
-    }
 ];
 
 addNewButton.addEventListener('click', () => {
