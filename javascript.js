@@ -2,7 +2,78 @@ const addNewButton = document.querySelector('.new-button');
 const formDialogue = document.querySelector('.form-dialogue');
 const formCloseButton = document.querySelector('.form-close-button');
 const bookShelf = document.querySelector('.book-shelf');
-const myLibrary = [];
+const myLibrary = [
+    {
+        bookId: "1",
+        title: "To Kill a Mockingbird",
+        author: "Harper Lee",
+        pages: 281,
+        read: true
+    },
+    {
+        bookId: "2",
+        title: "1984",
+        author: "George Orwell",
+        pages: 328,
+        read: false
+    },
+    {
+        bookId: "3",
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        pages: 180,
+        read: true
+    },
+    {
+        bookId: "4",
+        title: "Pride and Prejudice",
+        author: "Jane Austen",
+        pages: 432,
+        read: false
+    },
+    {
+        bookId: "5",
+        title: "The Catcher in the Rye",
+        author: "J.D. Salinger",
+        pages: 234,
+        read: true
+    },
+    {
+        bookId: "6",
+        title: "The Hobbit",
+        author: "J.R.R. Tolkien",
+        pages: 310,
+        read: false
+    },
+    {
+        bookId: "7",
+        title: "Brave New World",
+        author: "Aldous Huxley",
+        pages: 311,
+        read: true
+    },
+    {
+        bookId: "8",
+        title: "The Da Vinci Code",
+        author: "Dan Brown",
+        pages: 454,
+        read: false
+    },
+    {
+        bookId: "9",
+        title: "The Alchemist",
+        author: "Paulo Coelho",
+        pages: 197,
+        read: true
+    },
+    {
+        bookId: "10",
+        title: "Moby-Dick",
+        author: "Herman Melville",
+        pages: 585,
+        read: false
+    }
+];
 
 addNewButton.addEventListener('click', () => {
     formDialogue.showModal();
@@ -71,4 +142,10 @@ function createCard(title, author, pages, isRead, bookId) {
     card.appendChild(cardButtons);
 
     return card;
+}
+
+for (let key in myLibrary) {
+    if (myLibrary.hasOwnProperty(key)) {
+        bookShelf.appendChild(createCard(myLibrary[key].title, myLibrary[key].author, myLibrary[key].pages, myLibrary[key].read, myLibrary[key].bookId));
+    }
 }
