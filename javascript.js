@@ -49,7 +49,7 @@ const uiController = {
                 break;
             };    
         };
-        isFilled ? this.closeDialogue() : focusInput.focus();
+        if (isFilled) this.closeDialogue();
         return newBookData;
     },
 
