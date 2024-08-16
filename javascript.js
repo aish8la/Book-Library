@@ -13,26 +13,39 @@ const uiElement = {
         }
         return element;
     },
+    element: {},
+    elementSelector: function() {
+        this.element.bookShelf = document.querySelector('.book-shelf');
+        this.element.addNewButton = document.querySelector('.new-button');
+        this.element.formDialogue = document.querySelector('.form-dialogue');
+        this.element.newBookForm = document.querySelector('.new-book-form');
+        this.element.formCloseButton = document.querySelector('.form-close-button');
+        this.element.formSubmitButton = document.querySelector('.form-submit');
+    },
 };
 
 //UI Controllers 
 const uiController = {
-    addNewButton: document.querySelector('.new-button'),
-    formDialogue: document.querySelector('.form-dialogue'),
-    formCloseButton: document.querySelector('.form-close-button'),
+    closeDialogue: function() {
+        this.element.newBookForm.reset();
+        this.element.formDialogue.close();
+    },
     init: function() {
-        this.addNewButton.addEventListener('click', () => {
-            formDialogue.showModal();
+        this.element.addNewButton.addEventListener('click', () => {
+            this.element.formDialogue.showModal();
         });
-        this.formCloseButton.addEventListener('click', () => {
-            formDialogue.close();
+        this.element.formCloseButton.addEventListener('click', () => this.closeDialogue());
+        this.element.formSubmitButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            this.closeDialogue();
         });
     },
 };
 
+Object.setPrototypeOf(uiController, uiElement);
+
 //Library Object
 const Library = {
-    bookShelf: document.querySelector('.book-shelf'),
     myLibrary: [
     {
         bookId: "1",
@@ -78,21 +91,21 @@ const Library = {
     },
 ],
     createCard: function(title, author, pages, isRead, bookId) {
-    const card = elementCreate('div', {class: 'book-card', 'data-book-id': bookId});
+    const card = this.elementCreate('div', {class: 'book-card', 'data-book-id': bookId});
 
-    const bookDetails = elementCreate('div', {class: 'book-details'});
-    bookDetails.appendChild(elementCreate('div', {class: 'book-title'}, title));
-    bookDetails.appendChild(elementCreate('div', {class: 'book-author'}, author));
-    bookDetails.appendChild(elementCreate('div', {class: 'book-pages'}, `${pages} Pages`));
+    const bookDetails = this.elementCreate('div', {class: 'book-details'});
+    bookDetails.appendChild(this.elementCreate('div', {class: 'book-title'}, title));
+    bookDetails.appendChild(this.elementCreate('div', {class: 'book-author'}, author));
+    bookDetails.appendChild(this.elementCreate('div', {class: 'book-pages'}, `${pages} Pages`));
 
-    const cardTags = elementCreate('div', {class: 'card-tags'});
-    const readTrueTag = elementCreate('div', {class: 'tag read-tag'}, 'Read');
-    const readFalseTag = elementCreate('div', {class: 'tag unread-tag'}, 'Unread');
+    const cardTags = this.elementCreate('div', {class: 'card-tags'});
+    const readTrueTag = this.elementCreate('div', {class: 'tag read-tag'}, 'Read');
+    const readFalseTag = this.elementCreate('div', {class: 'tag unread-tag'}, 'Unread');
     cardTags.appendChild(isRead ? readTrueTag : readFalseTag);
 
-    const cardButtons = elementCreate('div', {class: 'card-buttons'});
-    cardButtons.appendChild(elementCreate('button', {class: 'read card-button', 'data-book-id': bookId}, 'Read'));
-    cardButtons.appendChild(elementCreate('button', {class: 'delete card-button', 'data-book-id': bookId}, 'Delete'));
+    const cardButtons = this.elementCreate('div', {class: 'card-buttons'});
+    cardButtons.appendChild(this.elementCreate('button', {class: 'read card-button', 'data-book-id': bookId}, 'Read'));
+    cardButtons.appendChild(this.elementCreate('button', {class: 'delete card-button', 'data-book-id': bookId}, 'Delete'));
 
     card.appendChild(bookDetails);
     card.appendChild(cardTags);
@@ -103,7 +116,7 @@ const Library = {
     displayBooks: function() {
         for (let key in this.myLibrary) {
             if (this.myLibrary.hasOwnProperty(key)) {
-                this.bookShelf.appendChild(createCard(myLibrary[key].title,
+                this.element.bookShelf.appendChild(this.createCard(this.myLibrary[key].title,
                     this.myLibrary[key].author,
                     this.myLibrary[key].pages,
                     this.myLibrary[key].read,
@@ -111,8 +124,7 @@ const Library = {
                 ));
             }
         }
-    }
-
+    },
 };
 
 Object.setPrototypeOf(Library, uiElement);
@@ -139,3 +151,9 @@ function BookObject(bookId, title, author, pages, read) {
 BookObject.prototype.readToggle = function() {
     this.read = !this.read;
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    uiElement.elementSelector();
+    uiController.init();
+    Library.displayBooks();
+});
