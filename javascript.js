@@ -25,37 +25,42 @@ const uiElement = {
 
 //UI Controllers 
 const uiController = {
+
     closeDialogue: function() {
         this.element.newBookForm.reset();
         this.element.formDialogue.close();
     },
+
+    formSubmit: function(e) {
+        e.preventDefault();
+        let isFilled = true;
+        const inputs = this.element.newBookForm.querySelectorAll('input');
+        let newBookData = {};
+        let focusInput;
+        for(input of inputs) {
+            if (input.type === 'checkbox') {
+                newBookData[input.name] = input.checked;
+            } else if (input.value) {
+                newBookData[input.name] = input.value;
+            } else {
+                isFilled = false;
+                newBookData = {};
+                focusInput = input;
+                break;
+            };    
+        };
+        isFilled ? this.closeDialogue() : focusInput.focus();
+        return newBookData;
+    },
+
     init: function() {
         this.element.addNewButton.addEventListener('click', () => {
             this.element.formDialogue.showModal();
         });
         this.element.formCloseButton.addEventListener('click', () => this.closeDialogue());
-        this.element.newBookForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            let isFilled = true;
-            const inputs = this.element.newBookForm.querySelectorAll('input');
-            let newBookData = {};
-            let focusInput;
-            for(input of inputs) {
-                if (input.type === 'checkbox') {
-                    newBookData[input.name] = input.checked;
-                } else if (input.value) {
-                    newBookData[input.name] = input.value;
-                } else {
-                    isFilled = false;
-                    newBookData = {};
-                    focusInput = input;
-                    break;
-                };    
-            };
-            isFilled ? this.closeDialogue() : focusInput.focus();
-            return newBookData;
-        });
+        this.element.newBookForm.addEventListener('submit', (e) => this.formSubmit(e));
     },
+
 };
 
 Object.setPrototypeOf(uiController, uiElement);
@@ -141,6 +146,8 @@ const Library = {
             }
         }
     },
+
+
 };
 
 Object.setPrototypeOf(Library, uiElement);
