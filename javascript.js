@@ -114,7 +114,7 @@ const Library = {
         read: false
     },
 ],
-    createCard: function(title, author, pages, isRead, bookId) {
+    createCard: function(bookId, title, author, pages, isRead) {
     const card = this.elementCreate('div', {class: 'book-card', 'data-book-id': bookId});
 
     const bookDetails = this.elementCreate('div', {class: 'book-details'});
@@ -140,11 +140,11 @@ const Library = {
     displayBooks: function() {
         for (let key in this.myLibrary) {
             if (this.myLibrary.hasOwnProperty(key)) {
-                this.element.bookShelf.appendChild(this.createCard(this.myLibrary[key].title,
+                this.element.bookShelf.appendChild(this.createCard(this.myLibrary[key].bookId, 
+                    this.myLibrary[key].title,
                     this.myLibrary[key].author,
                     this.myLibrary[key].pages,
                     this.myLibrary[key].read,
-                    this.myLibrary[key].bookId
                 ));
             }
         }
@@ -153,13 +153,13 @@ const Library = {
     addNewBook: function (bookDetails = {}) {
         const {book_title: title, book_author: author, book_pages: pages, read_status: isRead} = bookDetails;
         const bookId = idGenerator.generateBookId();
+        const newBook = new BookObject(bookId,  title, author, pages, isRead);
+        const newCard = this.createCard(bookId, title, author, pages, isRead);
+        this.myLibrary.push(newBook);
+        this.element.bookShelf.appendChild(newCard);
 
-
-        // console.log(title);
-        // console.log(author);
-        // console.log(pages);
-        // console.log(isRead);
-        console.log(bookId);
+        // console.log(bookDetails);
+        // console.log(this.myLibrary);
     }
 };
 
