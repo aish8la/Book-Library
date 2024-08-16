@@ -1,8 +1,39 @@
-const addNewButton = document.querySelector('.new-button');
-const formDialogue = document.querySelector('.form-dialogue');
-const formCloseButton = document.querySelector('.form-close-button');
-const bookShelf = document.querySelector('.book-shelf');
-const myLibrary = [
+// UI Object
+const uiElement = {
+    elementCreate: function(tagName, attribute = {}, textContent) {
+        const element = document.createElement(tagName);
+    
+        for (const key in attribute) {
+            if (attribute.hasOwnProperty(key)) {
+                element.setAttribute(key, attribute[key]);
+            }
+            if (textContent) {
+                element.textContent = textContent;
+            }
+        }
+        return element;
+    },
+};
+
+//UI Controllers 
+const uiController = {
+    addNewButton: document.querySelector('.new-button'),
+    formDialogue: document.querySelector('.form-dialogue'),
+    formCloseButton: document.querySelector('.form-close-button'),
+    init: function() {
+        this.addNewButton.addEventListener('click', () => {
+            formDialogue.showModal();
+        });
+        this.formCloseButton.addEventListener('click', () => {
+            formDialogue.close();
+        });
+    },
+};
+
+//Library Object
+const Library = {
+    bookShelf: document.querySelector('.book-shelf'),
+    myLibrary: [
     {
         bookId: "1",
         title: "To Kill a Mockingbird",
@@ -45,54 +76,8 @@ const myLibrary = [
         pages: 310,
         read: false
     },
-];
-
-addNewButton.addEventListener('click', () => {
-    formDialogue.showModal();
-});
-
-formCloseButton.addEventListener('click', () => {
-    formDialogue.close();
-});
-
-function BookObject(bookId, title, author, pages, read) {
-    this.bookId = bookId;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-BookObject.prototype.readToggle = function() {
-    this.read = !this.read;
-}
-
-const generateUniqueId = (function outerIdGen() {
-    let newId = 0;
-    return () => {
-        return `bkID-${++newId}`;
-    }
-})();
-
-
-// For creating elements
-function elementCreate(tagName, attribute = {}, textContent) {
-    const element = document.createElement(tagName);
-
-    for (const key in attribute) {
-        if (attribute.hasOwnProperty(key)) {
-            element.setAttribute(key, attribute[key]);
-        }
-        if (textContent) {
-            element.textContent = textContent;
-        }
-    }
-    return element;
-}
-
-
-// Function to create the card element
-function createCard(title, author, pages, isRead, bookId) {
+],
+    createCard: function(title, author, pages, isRead, bookId) {
     const card = elementCreate('div', {class: 'book-card', 'data-book-id': bookId});
 
     const bookDetails = elementCreate('div', {class: 'book-details'});
@@ -114,10 +99,43 @@ function createCard(title, author, pages, isRead, bookId) {
     card.appendChild(cardButtons);
 
     return card;
+},
+    displayBooks: function() {
+        for (let key in this.myLibrary) {
+            if (this.myLibrary.hasOwnProperty(key)) {
+                this.bookShelf.appendChild(createCard(myLibrary[key].title,
+                    this.myLibrary[key].author,
+                    this.myLibrary[key].pages,
+                    this.myLibrary[key].read,
+                    this.myLibrary[key].bookId
+                ));
+            }
+        }
+    }
+
+};
+
+Object.setPrototypeOf(Library, uiElement);
+
+//ID generators
+const idGenerator = {
+    generateBookId: (function outerIdGen() {
+    let newId = 0;
+    return () => {
+        return `bkID-${++newId}`;
+    }
+    })(),
 }
 
-for (let key in myLibrary) {
-    if (myLibrary.hasOwnProperty(key)) {
-        bookShelf.appendChild(createCard(myLibrary[key].title, myLibrary[key].author, myLibrary[key].pages, myLibrary[key].read, myLibrary[key].bookId));
-    }
-}
+//Book Object Constructor
+function BookObject(bookId, title, author, pages, read) {
+    this.bookId = bookId;
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+};
+
+BookObject.prototype.readToggle = function() {
+    this.read = !this.read;
+};
