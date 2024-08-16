@@ -52,7 +52,6 @@ const uiController = {
         if (isFilled) {
             this.closeDialogue();
         } else return;
-        // console.log(newBookData);
         Library.addNewBook(newBookData);
     },
 
