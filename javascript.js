@@ -49,8 +49,11 @@ const uiController = {
                 break;
             };    
         };
-        if (isFilled) this.closeDialogue();
-        return newBookData;
+        if (isFilled) {
+            this.closeDialogue();
+        } else return;
+        // console.log(newBookData);
+        Library.addNewBook(newBookData);
     },
 
     init: function() {
@@ -147,28 +150,36 @@ const Library = {
         }
     },
 
+    addNewBook: function (bookDetails = {}) {
+        const {book_title: title, book_author: author, book_pages: pages, read_status: isRead} = bookDetails;
+        const bookId = idGenerator.generateBookId();
 
+
+        // console.log(title);
+        // console.log(author);
+        // console.log(pages);
+        // console.log(isRead);
+        console.log(bookId);
+    }
 };
 
 Object.setPrototypeOf(Library, uiElement);
 
 //ID generators
 const idGenerator = {
-    generateBookId: (function outerIdGen() {
-    let newId = 0;
-    return () => {
-        return `bkID-${++newId}`;
+    newId: 0,
+    generateBookId: function () {
+    return `bkID-${++this.newId}`;
     }
-    })(),
-}
+};
 
 //Book Object Constructor
-function BookObject(bookId, title, author, pages, read) {
+function BookObject(bookId, title, author, pages, isRead) {
     this.bookId = bookId;
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.isRead = isRead;
 };
 
 BookObject.prototype.readToggle = function() {
