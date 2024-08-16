@@ -20,7 +20,6 @@ const uiElement = {
         this.element.formDialogue = document.querySelector('.form-dialogue');
         this.element.newBookForm = document.querySelector('.new-book-form');
         this.element.formCloseButton = document.querySelector('.form-close-button');
-        this.element.formSubmitButton = document.querySelector('.form-submit');
     },
 };
 
@@ -35,9 +34,26 @@ const uiController = {
             this.element.formDialogue.showModal();
         });
         this.element.formCloseButton.addEventListener('click', () => this.closeDialogue());
-        this.element.formSubmitButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            this.closeDialogue();
+        this.element.newBookForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isFilled = true;
+            const inputs = this.element.newBookForm.querySelectorAll('input');
+            let newBookData = {};
+            let focusInput;
+            for(input of inputs) {
+                if (input.type === 'checkbox') {
+                    newBookData[input.name] = input.checked;
+                } else if (input.value) {
+                    newBookData[input.name] = input.value;
+                } else {
+                    isFilled = false;
+                    newBookData = {};
+                    focusInput = input;
+                    break;
+                };    
+            };
+            isFilled ? this.closeDialogue() : focusInput.focus();
+            return newBookData;
         });
     },
 };
