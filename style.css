@@ -133,12 +133,11 @@ body {
     cursor: pointer;
 }
 
-body > div > .page-container {
+body > div.page-container {
     display: grid;
     grid-template-rows: auto 1fr auto;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
-    gap: 15px;
     min-height: 100vh;
 }
 
