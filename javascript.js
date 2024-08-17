@@ -1,3 +1,63 @@
+const bulkAddData = [
+    {
+        book_title: "To Kill a Mockingbird",
+        book_author: "Harper Lee",
+        book_pages: 281,
+        read_status: true
+    },
+    {
+        book_title: "1984",
+        book_author: "George Orwell",
+        book_pages: 328,
+        read_status: false
+    },
+    {
+        book_title: "The Great Gatsby",
+        book_author: "F. Scott Fitzgerald",
+        book_pages: 180,
+        read_status: true
+    },
+    {
+        book_title: "Pride and Prejudice",
+        book_author: "Jane Austen",
+        book_pages: 432,
+        read_status: false
+    },
+    {
+        book_title: "The Catcher in the Rye",
+        book_author: "J.D. Salinger",
+        book_pages: 234,
+        read_status: true
+    },
+    {
+        book_title: "The Hobbit",
+        book_author: "J.R.R. Tolkien",
+        book_pages: 310,
+        read_status: false
+    },
+]
+
+//Book Object Constructor
+function BookObject(bookId, title, author, pages, isRead) {
+    this.bookId = bookId;
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+};
+
+BookObject.prototype.readToggle = function() {
+    this.isRead = !this.isRead;
+};
+
+//ID generators
+const idGenerator = {
+    newId: 0,
+    generateBookId: function () {
+    return `bkID-${++this.newId}`;
+    }
+};
+
 // UI Object
 const uiElement = {
     elementCreate: function(tagName, attribute = {}, textContent) {
@@ -79,48 +139,7 @@ Object.setPrototypeOf(uiController, uiElement);
 //Library Object
 const Library = {
     myLibrary: [
-    {
-        bookId: "1",
-        title: "To Kill a Mockingbird",
-        author: "Harper Lee",
-        pages: 281,
-        read: true
-    },
-    {
-        bookId: "2",
-        title: "1984",
-        author: "George Orwell",
-        pages: 328,
-        read: false
-    },
-    {
-        bookId: "3",
-        title: "The Great Gatsby",
-        author: "F. Scott Fitzgerald",
-        pages: 180,
-        read: true
-    },
-    {
-        bookId: "4",
-        title: "Pride and Prejudice",
-        author: "Jane Austen",
-        pages: 432,
-        read: false
-    },
-    {
-        bookId: "5",
-        title: "The Catcher in the Rye",
-        author: "J.D. Salinger",
-        pages: 234,
-        read: true
-    },
-    {
-        bookId: "6",
-        title: "The Hobbit",
-        author: "J.R.R. Tolkien",
-        pages: 310,
-        read: false
-    },
+   
 ],
 
 readTag: function(tagElement, isRead) {
@@ -184,7 +203,7 @@ readTag: function(tagElement, isRead) {
                     this.myLibrary[key].title,
                     this.myLibrary[key].author,
                     this.myLibrary[key].pages,
-                    this.myLibrary[key].read,
+                    this.myLibrary[key].isRead,
                 ));
             }
         }
@@ -224,30 +243,16 @@ readTag: function(tagElement, isRead) {
 
 Object.setPrototypeOf(Library, uiElement);
 
-//ID generators
-const idGenerator = {
-    newId: 0,
-    generateBookId: function () {
-    return `bkID-${++this.newId}`;
-    }
-};
-
-//Book Object Constructor
-function BookObject(bookId, title, author, pages, isRead) {
-    this.bookId = bookId;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-};
-
-BookObject.prototype.readToggle = function() {
-    this.isRead = !this.isRead;
+function bulkImport(dataArray) {
+    dataArray.forEach(book => {
+        Library.addNewBook(book);
+    });
 };
 
 //Initializer
 document.addEventListener('DOMContentLoaded', () => {
     uiElement.elementSelector();
     uiController.init();
+    bulkImport(bulkAddData);
     Library.displayBooks();
 });
