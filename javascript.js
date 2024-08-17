@@ -185,7 +185,11 @@ const Library = {
         this.element.bookShelf.appendChild(newCard);
     },
 
-    
+    findIndexLibrary: function (bookId) {
+        const searchId = bookId;
+        const indexOfBook = this.myLibrary.findIndex(book => book.bookId === searchId);
+        console.log(indexOfBook);
+    },
 
     deleteBook: function (e) {
         const cardElement = e.closest('[data-element-type="book-card"]');
