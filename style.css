@@ -178,12 +178,13 @@ body > div.page-container {
 .book-shelf {
     grid-row: 2 / 3;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: minmax(220px, 50%);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: minmax(220px, auto);
     gap: 15px;
     align-content: start;
     padding: 20px 30px;
     margin: 0 15px;
+    justify-content: center;
 }
 
 .book-card {
