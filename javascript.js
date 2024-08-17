@@ -55,12 +55,19 @@ const uiController = {
         Library.addNewBook(newBookData);
     },
 
+    cardButtonClick: function(e) {
+        if(e.target) {
+
+        }
+    },
+
     init: function() {
         this.element.addNewButton.addEventListener('click', () => {
             this.element.formDialogue.showModal();
         });
         this.element.formCloseButton.addEventListener('click', () => this.closeDialogue());
         this.element.newBookForm.addEventListener('submit', (e) => this.formSubmit(e));
+        // this.element.bookShelf.addEventListener('click', (e) => {});
     },
 
 };
@@ -127,8 +134,24 @@ const Library = {
     cardTags.appendChild(isRead ? readTrueTag : readFalseTag);
 
     const cardButtons = this.elementCreate('div', {class: 'card-buttons'});
-    cardButtons.appendChild(this.elementCreate('button', {class: 'read card-button', 'data-book-id': bookId}, 'Read'));
-    cardButtons.appendChild(this.elementCreate('button', {class: 'delete card-button', 'data-book-id': bookId}, 'Delete'));
+    cardButtons.appendChild(this.elementCreate(
+        'button',
+        {
+            class: 'read card-button','data-book-id': bookId,
+            'data-element-type': 'card-button',
+            'data-button':'read'
+        },
+        'Read'
+    ));
+    cardButtons.appendChild(this.elementCreate(
+        'button',
+        {class: 'delete card-button',
+            'data-book-id': bookId,
+            'data-element-type': 'card-button',
+            'data-button': 'delete'
+        },
+        'Delete'
+    ));
 
     card.appendChild(bookDetails);
     card.appendChild(cardTags);
@@ -159,7 +182,10 @@ const Library = {
 
         // console.log(bookDetails);
         // console.log(this.myLibrary);
-    }
+    },
+
+    // deleteBook: function (e) {
+    // }
 };
 
 Object.setPrototypeOf(Library, uiElement);
