@@ -123,6 +123,7 @@ const Library = {
         read: false
     },
 ],
+//Create Book Card Function
     createCard: function(bookId, title, author, pages, isRead) {
     const card = this.elementCreate('div', {class: 'book-card', 'data-book-id': bookId, 'data-element-type': 'book-card'});
 
@@ -132,9 +133,15 @@ const Library = {
     bookDetails.appendChild(this.elementCreate('div', {class: 'book-pages'}, `${pages} Pages`));
 
     const cardTags = this.elementCreate('div', {class: 'card-tags'});
-    const readTrueTag = this.elementCreate('div', {class: 'tag read-tag'}, 'Read');
-    const readFalseTag = this.elementCreate('div', {class: 'tag unread-tag'}, 'Unread');
-    cardTags.appendChild(isRead ? readTrueTag : readFalseTag);
+    let readTag;
+
+    if (isRead) {
+        readTag = this.elementCreate('div', {class: 'tag read-tag'}, 'Read');
+    } else {
+        readTag = this.elementCreate('div', {class: 'tag unread-tag'}, 'Unread');
+    };
+
+    cardTags.appendChild(readTag);
 
     const cardButtons = this.elementCreate('div', {class: 'card-buttons'});
     cardButtons.appendChild(this.elementCreate(
@@ -144,7 +151,7 @@ const Library = {
             'data-element-type': 'card-button',
             'data-button':'read'
         },
-        'Read'
+        'Read Toggle'
     ));
     cardButtons.appendChild(this.elementCreate(
         'button',
@@ -155,13 +162,12 @@ const Library = {
         },
         'Delete'
     ));
-
     card.appendChild(bookDetails);
     card.appendChild(cardTags);
     card.appendChild(cardButtons);
-
     return card;
 },
+
     displayBooks: function() {
         for (let key in this.myLibrary) {
             if (this.myLibrary.hasOwnProperty(key)) {
@@ -221,6 +227,7 @@ BookObject.prototype.readToggle = function() {
     this.read = !this.read;
 };
 
+//Initializer
 document.addEventListener('DOMContentLoaded', () => {
     uiElement.elementSelector();
     uiController.init();
