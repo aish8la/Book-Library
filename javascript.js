@@ -56,9 +56,8 @@ const uiController = {
     },
 
     cardButtonClick: function(e) {
-        console.log(e);
         if (e.target.matches('[data-button="read"]')) {
-            console.log('read button');
+            Library.readBook(e.target);
         } else if (e.target.matches('[data-button="delete"]')) {
             Library.deleteBook(e.target);
         }
@@ -123,6 +122,27 @@ const Library = {
         read: false
     },
 ],
+
+readTag: function(tagElement, isRead) {
+    let tagClass;
+    let tagText;
+    if (isRead) {
+        tagClass = 'tag read-tag';
+        tagText = 'Read';
+    } else {
+        tagClass = 'tag unread-tag';
+        tagText = 'Unread';
+    }
+
+    tagElement.setAttribute('class', tagClass);
+    tagElement.textContent = tagText;
+    // if (isRead) {
+    //     return this.elementCreate('div', {class: 'tag read-tag'}, 'Read');
+    // } else {
+    //     return this.elementCreate('div', {class: 'tag unread-tag'}, 'Unread');
+    // };
+},
+
 //Create Book Card Function
     createCard: function(bookId, title, author, pages, isRead) {
     const card = this.elementCreate('div', {class: 'book-card', 'data-book-id': bookId, 'data-element-type': 'book-card'});
@@ -133,14 +153,8 @@ const Library = {
     bookDetails.appendChild(this.elementCreate('div', {class: 'book-pages'}, `${pages} Pages`));
 
     const cardTags = this.elementCreate('div', {class: 'card-tags'});
-    let readTag;
-
-    if (isRead) {
-        readTag = this.elementCreate('div', {class: 'tag read-tag'}, 'Read');
-    } else {
-        readTag = this.elementCreate('div', {class: 'tag unread-tag'}, 'Unread');
-    };
-
+    const readTag = this.elementCreate('div', {'data-tag-type': 'read-tag'});
+    this.readTag(readTag, isRead);
     cardTags.appendChild(readTag);
 
     const cardButtons = this.elementCreate('div', {class: 'card-buttons'});
@@ -201,7 +215,15 @@ const Library = {
         const bookId = e.dataset.bookId;
         this.myLibrary.splice(this.findIndexLibrary(bookId), 1);
         this.element.bookShelf.removeChild(cardElement);
-    }
+    },
+
+    readBook: function (e) {
+        const bookId = e.dataset.bookId;
+        // const bookIndex = this.findIndexLibrary(bookId);
+        this.myLibrary[this.findIndexLibrary(bookId)].readToggle();
+        console.log(this.myLibrary[this.findIndexLibrary(bookId)]);
+        console.log(bookId);
+    },
 };
 
 Object.setPrototypeOf(Library, uiElement);
@@ -224,7 +246,7 @@ function BookObject(bookId, title, author, pages, isRead) {
 };
 
 BookObject.prototype.readToggle = function() {
-    this.read = !this.read;
+    this.isRead = !this.isRead;
 };
 
 //Initializer
