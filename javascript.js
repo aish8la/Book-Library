@@ -136,11 +136,6 @@ readTag: function(tagElement, isRead) {
 
     tagElement.setAttribute('class', tagClass);
     tagElement.textContent = tagText;
-    // if (isRead) {
-    //     return this.elementCreate('div', {class: 'tag read-tag'}, 'Read');
-    // } else {
-    //     return this.elementCreate('div', {class: 'tag unread-tag'}, 'Unread');
-    // };
 },
 
 //Create Book Card Function
@@ -153,7 +148,7 @@ readTag: function(tagElement, isRead) {
     bookDetails.appendChild(this.elementCreate('div', {class: 'book-pages'}, `${pages} Pages`));
 
     const cardTags = this.elementCreate('div', {class: 'card-tags'});
-    const readTag = this.elementCreate('div', {'data-tag-type': 'read-tag'});
+    const readTag = this.elementCreate('div', {'data-tag-type': 'read-tag', 'data-book-id': bookId});
     this.readTag(readTag, isRead);
     cardTags.appendChild(readTag);
 
@@ -211,18 +206,19 @@ readTag: function(tagElement, isRead) {
     },
 
     deleteBook: function (e) {
-        const cardElement = e.closest('[data-element-type="book-card"]');
         const bookId = e.dataset.bookId;
+        const cardElement = e.closest(`[data-element-type="book-card"][data-book-id="${bookId}"]`);
         this.myLibrary.splice(this.findIndexLibrary(bookId), 1);
         this.element.bookShelf.removeChild(cardElement);
     },
 
     readBook: function (e) {
         const bookId = e.dataset.bookId;
-        // const bookIndex = this.findIndexLibrary(bookId);
-        this.myLibrary[this.findIndexLibrary(bookId)].readToggle();
-        console.log(this.myLibrary[this.findIndexLibrary(bookId)]);
-        console.log(bookId);
+        const bookIndex = this.findIndexLibrary(bookId);
+        const tagElement = e.closest(`[data-element-type="book-card"][data-book-id="${bookId}"]`)
+                            .querySelector(`[data-tag-type="read-tag"][data-book-id="${bookId}"]`);
+        this.myLibrary[bookIndex].readToggle();
+        this.readTag(tagElement, this.myLibrary[bookIndex].isRead);
     },
 };
 
