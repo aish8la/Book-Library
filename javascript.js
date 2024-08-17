@@ -197,8 +197,10 @@ readTag: function(tagElement, isRead) {
 },
 
     displayBooks: function() {
-        for (let key in this.myLibrary) {
-            if (this.myLibrary.hasOwnProperty(key)) {
+        for (let key = 0; key < this.myLibrary.length; key++) {
+            const currentBookId = this.myLibrary[key].bookId;
+            const isVisible = !!this.element.bookShelf.querySelector(`[data-element-type="book-card"][data-book-id="${currentBookId}"]`);
+            if (!isVisible) {
                 this.element.bookShelf.appendChild(this.createCard(this.myLibrary[key].bookId, 
                     this.myLibrary[key].title,
                     this.myLibrary[key].author,
