@@ -56,8 +56,11 @@ const uiController = {
     },
 
     cardButtonClick: function(e) {
-        if(e.target) {
-
+        console.log(e);
+        if (e.target.matches('[data-button="read"]')) {
+            console.log('read button');
+        } else if (e.target.matches('[data-button="delete"]')) {
+            console.log('delete button');
         }
     },
 
@@ -67,7 +70,7 @@ const uiController = {
         });
         this.element.formCloseButton.addEventListener('click', () => this.closeDialogue());
         this.element.newBookForm.addEventListener('submit', (e) => this.formSubmit(e));
-        // this.element.bookShelf.addEventListener('click', (e) => {});
+        this.element.bookShelf.addEventListener('click', (e) => this.cardButtonClick(e));
     },
 
 };
