@@ -60,7 +60,6 @@ const uiController = {
         if (e.target.matches('[data-button="read"]')) {
             console.log('read button');
         } else if (e.target.matches('[data-button="delete"]')) {
-            console.log('delete button');
             Library.deleteBook(e.target);
         }
     },
@@ -188,13 +187,14 @@ const Library = {
     findIndexLibrary: function (bookId) {
         const searchId = bookId;
         const indexOfBook = this.myLibrary.findIndex(book => book.bookId === searchId);
-        console.log(indexOfBook);
+        return indexOfBook;
     },
 
     deleteBook: function (e) {
         const cardElement = e.closest('[data-element-type="book-card"]');
         const bookId = e.dataset.bookId;
-        console.log(bookId);
+        this.myLibrary.splice(this.findIndexLibrary(bookId), 1);
+        this.element.bookShelf.removeChild(cardElement);
     }
 };
 
