@@ -61,6 +61,7 @@ const uiController = {
             console.log('read button');
         } else if (e.target.matches('[data-button="delete"]')) {
             console.log('delete button');
+            Library.deleteBook(e.target);
         }
     },
 
@@ -124,7 +125,7 @@ const Library = {
     },
 ],
     createCard: function(bookId, title, author, pages, isRead) {
-    const card = this.elementCreate('div', {class: 'book-card', 'data-book-id': bookId});
+    const card = this.elementCreate('div', {class: 'book-card', 'data-book-id': bookId, 'data-element-type': 'book-card'});
 
     const bookDetails = this.elementCreate('div', {class: 'book-details'});
     bookDetails.appendChild(this.elementCreate('div', {class: 'book-title'}, title));
@@ -182,13 +183,15 @@ const Library = {
         const newCard = this.createCard(bookId, title, author, pages, isRead);
         this.myLibrary.push(newBook);
         this.element.bookShelf.appendChild(newCard);
-
-        // console.log(bookDetails);
-        // console.log(this.myLibrary);
     },
 
-    // deleteBook: function (e) {
-    // }
+    
+
+    deleteBook: function (e) {
+        const cardElement = e.closest('[data-element-type="book-card"]');
+        const bookId = e.dataset.bookId;
+        console.log(bookId);
+    }
 };
 
 Object.setPrototypeOf(Library, uiElement);
