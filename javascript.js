@@ -1,3 +1,4 @@
+//Default Data / Import Books in Bulk
 const bulkAddData = [
     {
         book_title: "To Kill a Mockingbird",
@@ -38,17 +39,33 @@ const bulkAddData = [
 ]
 
 //Book Object Constructor
-function BookObject(bookId, title, author, pages, isRead) {
-    this.bookId = bookId;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-};
 
-BookObject.prototype.readToggle = function() {
-    this.isRead = !this.isRead;
-};
+//Old Constructor Function
+// function BookObject(bookId, title, author, pages, isRead) {
+//     this.bookId = bookId;
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.isRead = isRead;
+// };
+
+// BookObject.prototype.readToggle = function() {
+//     this.isRead = !this.isRead;
+// };
+
+class BookObject {
+    constructor(bookId, title, author, pages, isRead) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+
+    readToggle() {
+        this.isRead = !this.isRead;
+    }
+}
 
 //ID generators
 const idGenerator = {
